@@ -12,15 +12,15 @@ export interface Row {
 
 
 export class DataManipulator {
-  static generateRow(serverResponds: ServerRespond[]): Row[] {
-    const price_ABC = (serverResponds[0].top_ask.price + serverResponds[0].top_bid.price)/2;
-    const price_DEF = (serverResponds[1].top_ask.price + serverResponds[1].top_bid.price)/2;
-    const ratio = price_ABC/price_DEF;
+  static generateRow(serverResponds: ServerRespond[]): Row {
+    const priceABC = (serverResponds[0].top_ask.price + serverResponds[0].top_bid.price)/2;
+    const priceDEF = (serverResponds[1].top_ask.price + serverResponds[1].top_bid.price)/2;
+    const ratio = priceABC/priceDEF;
     const upperbound = 1 + 0.05;
     const lowerbound = 1 - 0.05;
     return {
-      price_ABC,
-      price_DEF,
+      price_ABC: priceABC, 
+      price_DEF: priceDEF,
       ratio,
       timestamp: serverResponds[0].timestamp > serverResponds[1].timestamp ? serverResponds[0].timestamp : serverResponds[1].timestamp,
       upperbound,
